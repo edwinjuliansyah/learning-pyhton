@@ -42,3 +42,27 @@ Ini adalah logika validasi gerbang depan. **Domain constraint** mencegah masukny
 ## Konsistensi Relasi Lintas-Tabel: Referential Integrity
 
 Aturan sebab-akibat tertinggi antar tabel untuk mencegah anomali orphan records (data yatim piatu). Logikanya: Jika Tabel A memiliki **Foreign Key** yang menunjuk ke Tabel B, maka nilai data tersebut wajib eksis terlebih dahulu secara fisik di Tabel B. (Sistem akan melempar error jika kita memasukkan ID Siswa di tabel Nilai, namun ID tersebut belum terdaftar di tabel master Siswa).
+
+---
+
+# Konsep Key dalam Desain Basis Data Relasional
+
+## Atribut Multi-Value
+
+Konsep dasar di mana setiap kolom (attribute) dalam baris data harus memegang nilai tunggal (**simple attribute**). Atribut multi-nilai (contoh: satu kolom berisi list beberapa mata pelajaran) harus dihindari dalam desain relasional karena akan merusak integritas struktur data dan menyulitkan kueri.
+
+## Candidate Key
+
+Kolom apa pun dalam tabel yang memiliki data unik di setiap barisnya (tidak ada duplikasi) sehingga secara teknis berpotensi/kandidat untuk dijadikan pengidentifikasi baris tersebut. Satu tabel bisa memiliki beberapa **Candidate Key**.
+
+## Primary Key vs Alternate Key
+
+**Primary Key** adalah satu Candidate Key yang secara resmi dipilih oleh engineer sebagai identitas utama tabel tersebut. Sisa Candidate Key lain yang tidak terpilih secara otomatis statusnya menjadi **Alternate Key** (atau Secondary Key).
+
+## Composite Key
+
+Gabungan dua kolom atau lebih yang disatukan untuk membentuk sebuah identifier yang unik. Secara logika, teknik ini digunakan sebagai solusi fallback ketika sebuah tabel tidak memiliki satu pun kolom tunggal yang nilainya bisa dijamin 100% unik (misalnya: menggabungkan `Nama Staf` + `Jabatan`).
+
+## Foreign Key
+
+Kolom dalam sebuah tabel yang berisi referensi langsung ke Primary Key milik tabel lain. Secara arsitektural, ini adalah 'jembatan' fundamental yang mengeksekusi sifat "relasional" dari database—mengubah tabel-tabel yang terisolasi menjadi satu sistem yang saling terhubung.
