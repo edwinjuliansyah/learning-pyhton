@@ -17,7 +17,18 @@ Menambahkan data `INSERT INTO nama_table (kolom1, kolom2, kolom3) VALUES (data1,
 
 Menambahkan data kekolom kosong dengan referensi dari kolom ditable lain `INSERT INTO table_target (kolom1, kolom2) SELECT kolom_referensi1, kolom_referensi2 FROM nama_table_referensi;`
 
+Update data `UPDATE nama_table SET nama_kolom = 'data_baru' WHERE kolom = data_kolom;`
+
+Delete data
+- Hapus semua isi data tanpa menghapus table `DELETE FROM nama_table;`
+- Hapus sebagian `DELETE FROM nama_table WHERE kolom = data_kolom;`
+
 # DQL
 
 Menampilkan data `SELECT kolom1, kolom2 FROM table;`, jika ingin menampilkan semua gunakan * `SELECT * FROM table;`
 
+--- 
+
+Arithmetic Operators `+` `-` `*` `/` `%`
+
+Comparison Operators `<` `>` `=` `!= or <>` `<=` `>=`
