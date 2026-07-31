@@ -25,10 +25,19 @@ Delete data
 
 # DQL
 
-Menampilkan data `SELECT kolom1, kolom2 FROM table;`, jika ingin menampilkan semua gunakan * `SELECT * FROM table;`
+Menampilkan data `SELECT kolom1, kolom2 FROM table;`, jika ingin menampilkan semua gunakan * `SELECT * FROM table;`pu
 
 --- 
 
-Arithmetic Operators `+` `-` `*` `/` `%`
+Arithmetic Operators `*` `/` `%` `+` `-`
 
-Comparison Operators `<` `>` `=` `!= or <>` `<=` `>=`
+Comparison Operators `=` `<` `>` `<=` `>=` `!= or <>` `!<` `!>`
+
+Logical Operators `AND` `OR` `ALL` `ANY` `BETWEEN` `EXISTS` `IN` `LIKE` `NOT` `IS NULL` `UNIQUE`
+
+
+`WHERE` Filter data
+
+`ORDER BY` Mengurutkan data secara ASC atau DESC
+
+`DISTINCT` Mengambil nilai unik 
