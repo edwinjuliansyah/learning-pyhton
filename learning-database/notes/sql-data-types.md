@@ -21,3 +21,31 @@ Logika **presisi angka**; `INTEGER` hanya memproses bilangan bulat dan akan otom
 ## NOT NULL vs DEFAULT
 
 Strategi penanganan data kosong (null/empty); `NOT NULL` merupakan penanganan ketat yang akan menggagalkan perekaman jika kolom krusial dibiarkan kosong, sementara `DEFAULT` merupakan penanganan reaktif yang menyelamatkan perekaman dengan cara menyuntikkan nilai fallback secara otomatis saat tidak ada input dari pengguna.
+
+---
+
+# Peran Data Types
+
+## Menentukan Aturan Operator (Komunikasi Sistem)
+
+Tipe data adalah cara database mengidentifikasi dan membatasi operasi apa yang sah digunakan pada sebuah kolom. Misalnya, operasi aritmatika murni hanya berlaku untuk tipe data numerik, sementara pencarian pola (`LIKE`) didesain khusus untuk tipe data teks.
+
+## Manajemen Alokasi Memori
+
+Tipe data bertindak sebagai cetak biru bagi server untuk memesan kapasitas ruang penyimpanan yang presisi dan efisien di dalam hard drive maupun RAM (sebagai contoh, `TINYINT` memesan 1 byte, sedangkan `INT` memesan 4 byte).
+
+## Penjaga Gerbang Integritas (Kontrak Data)
+
+Tipe data berfungsi sebagai pertahanan pertama sistem yang secara otomatis menolak masukan data yang menyalahi format atau tidak logis (seperti menolak teks biasa yang dimasukkan ke dalam kolom `DATE`), sehingga memastikan data selalu bersih dan terprediksi.
+
+## Optimasi Kecepatan Pencarian (Indeks)
+
+Database mengurutkan indeks berdasarkan tipe datanya. Angka diurutkan secara matematis, sedangkan teks diurutkan secara leksikografis (seperti kamus). Definisi tipe data yang tepat membuat mesin database mampu menemukan data dalam jumlah masif dengan sangat cepat.
+
+## Mencegah Konversi Siluman (Implicit Conversion)
+
+Tipe data memaksa instruksi dieksekusi secara eksplisit. Hal ini mencegah sistem database mencoba "menebak-nebak" dan mengubah format data secara diam-diam di belakang layar, yang mana sering menjadi akar penyebab error atau anomali komputasi.
+
+## Syarat Mutlak Relasi Antartabel (Primary & Foreign Key)
+
+Dalam menghubungkan dua tabel yang berbeda, tipe data pada **Primary Key** (tabel referensi) dan **Foreign Key** (tabel anak) harus 100% identik. Kontrak kaku ini menjamin database tidak salah mencocokkan identitas dan memastikan proses penggabungan tabel (`JOIN`) berjalan sangat cepat tanpa beban memori yang tidak perlu.
