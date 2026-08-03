@@ -21,3 +21,47 @@ Lapisan ini berfungsi murni untuk keamanan (`security`) dan abstraksi data berba
 ## EFEK DOMINO DESAIN SKEMA
 
 Desain skema yang buruk akan memaksa engineer melakukan `reverse-engineering` di masa depan yang memakan waktu dan biaya besar. Skema yang terdefinisi dengan kuat di awal adalah prasyarat mutlak untuk menghasilkan query yang efisien untuk analitik, menjaga konsistensi/kebersihan data, dan mempermudah pengaturan isolasi hak akses keamanan antar-objek database.
+
+---
+
+# Three-Schema Architecture
+
+Diagram ini menggambarkan tiga lapisan (layer) arsitektur skema database, dari yang paling dekat dengan user hingga yang paling dekat dengan penyimpanan fisik.
+
+```mermaid
+flowchart TB
+    subgraph EXT["🔵 EXTERNAL / VIEW SCHEMA"]
+        direction LR
+        V1["View: Divisi HR"]
+        V2["View: Divisi Finance"]
+        V3["View: Divisi Sales"]
+    end
+
+    subgraph CONC["🟢 CONCEPTUAL / LOGICAL SCHEMA"]
+        C["Entitas • Atribut • Relasi<br/>(ER-Diagram)"]
+    end
+
+    subgraph INT["🟠 INTERNAL / PHYSICAL SCHEMA"]
+        I["Struktur Tabel Fisik<br/>Tipe Data • Access Path • Index"]
+    end
+
+    subgraph DB["⚫ PHYSICAL DATABASE"]
+        D["Data tersimpan di Disk/Storage"]
+    end
+
+    V1 --> C
+    V2 --> C
+    V3 --> C
+    C -->|mapping| I
+    I -->|mapping| D
+```
+
+## Penjelasan Tiap Lapisan
+
+**External / View Schema** — Lapisan teratas, berupa banyak "kacamata" berbeda untuk tiap kelompok user. Setiap divisi hanya melihat subset data yang relevan untuk mereka (fungsi keamanan & abstraksi berbasis peran).
+
+**Conceptual / Logical Schema** — Lapisan tengah, satu representasi tunggal yang menyatukan seluruh kebutuhan dari berbagai view di atasnya. Fokus pada "apa" data yang ada (entitas, atribut, relasi), tanpa peduli detail penyimpanan fisik.
+
+**Internal / Physical Schema** — Lapisan yang menerjemahkan skema konseptual ke bentuk teknis: bagaimana tabel benar-benar disusun, tipe data disimpan di memori, dan jalur akses (access path) dioptimalkan.
+
+**Physical Database** — Lapisan paling dasar, tempat data benar-benar tersimpan sebagai bytes di disk/storage.
