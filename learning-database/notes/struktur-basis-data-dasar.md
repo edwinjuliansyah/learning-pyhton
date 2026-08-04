@@ -6,6 +6,9 @@ Ketiga istilah ini merujuk pada konsep penyimpanan yang sama namun dari paradigm
 ## Anatomi Data: Kolom (Field) vs Baris (Record)
 Kolom mendefinisikan atribut spesifik dari data (seperti nama, ID), sedangkan baris adalah instansiasi dari atribut-atribut tersebut yang digabungkan menjadi satu entri/rekam jejak data tunggal yang utuh (misal: profil satu karyawan).
 
+## Degree (Derajat) vs Cardinality (Kardinalitas)
+**Degree** adalah jumlah total kolom atau atribut yang ada di dalam sebuah tabel. Sedangkan **Cardinality** jumlah total baris (record) yang ada di dalam sebuah tabel.
+
 ## Kontrak Tipe Data (Data Types)
 Berfungsi bukan sekadar untuk membedakan angka dan huruf, tetapi sebagai pedoman (guideline) instruksional bagi engine SQL tentang bagaimana data harus disimpan secara fisik dan bagaimana kueri berinteraksi dengannya. Edge-case penting: Implementasi spesifik tipe data tidak universal dan bisa berbeda antar sistem (misal: MySQL vs SQL Server), sehingga engineer harus selalu merujuk pada dokumentasi sistem yang dipakai.
 
@@ -66,3 +69,17 @@ Gabungan dua kolom atau lebih yang disatukan untuk membentuk sebuah identifier y
 ## Foreign Key
 
 Kolom dalam sebuah tabel yang berisi referensi langsung ke Primary Key milik tabel lain. Secara arsitektural, ini adalah 'jembatan' fundamental yang mengeksekusi sifat "relasional" dari database—mengubah tabel-tabel yang terisolasi menjadi satu sistem yang saling terhubung.
+
+---
+
+# Jenis-Jenis Relasi Antartabel
+
+Model relasional menghubungkan data antartabel menggunakan tiga jenis hubungan yang sering digambarkan melalui **ER-Diagram (Entity-Relationship Diagram)**:
+
+| Jenis Relasi | Penjelasan | Contoh |
+|---|---|---|
+| **One-to-One (1:1)** | Satu data di Tabel A berhubungan dengan tepat satu data di Tabel B. | 1 Negara memiliki 1 Ibukota; 1 Kepala Departemen memimpin 1 Departemen. |
+| **One-to-Many (1:N)** | Satu data di Tabel A berhubungan dengan banyak data di Tabel B. | 1 Pelanggan dapat membuat banyak Pesanan; 1 Mahasiswa mendaftar di banyak Kelas. |
+| **Many-to-Many (N:N)** | Banyak data di Tabel A berhubungan dengan banyak data di Tabel B. | Banyak Mahasiswa dibimbing oleh banyak Staf; Pelanggan membeli banyak Produk. |
+
+> *Relasi* Many-to-Many *biasanya tidak dibiarkan begitu saja, melainkan dipecah menjadi dua relasi* One-to-Many *dengan menambahkan sebuah tabel perantara (sering disebut `junction table`).*
