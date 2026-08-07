@@ -36,3 +36,19 @@
 
 * **1NF DECOMPOSITION & FOREIGN KEY**
   Solusi arsitektural yang sah untuk mencapai 1NF. Logikanya adalah mengidentifikasi entitas yang berbeda (misal: entitas "Kursus" dan "Tutor"), memecahnya menjadi tabel independen yang memiliki *Primary Key* masing-masing, lalu menautkan kembali kedua tabel tersebut secara relasional menggunakan *Foreign Key*.
+
+  ---
+
+  # Konsep Second Normal Form (2NF)
+
+* **FUNCTIONAL DEPENDENCY**
+  Logika relasi di mana nilai sebuah kolom (biasanya *non-primary key*) secara mutlak ditentukan oleh kolom lain yang unik (*primary key*). Secara intuitif, karena nilai seperti nama bisa ganda (misal: dua mahasiswa bernama "Tony"), sistem tidak bisa menggunakannya untuk pencarian spesifik; sistem harus menggunakan ID unik karena data personal tersebut bergantung secara fungsional pada entitas ID utamanya.
+
+* **PARTIAL DEPENDENCY**
+  Cacat desain atau *edge-case* yang terjadi secara khusus pada tabel berskema *Composite Primary Key*, di mana sebuah atribut non-kunci hanya bergantung pada *sebagian* dari kunci utama gabungan tersebut. Secara logika, ini memicu duplikasi data yang tidak perlu; contohnya, untuk mengetahui 'Nama Vaksin', sistem sebenarnya hanya butuh 'Vaccine ID', sehingga mengikatnya dengan 'Patient ID' merupakan sebuah redundansi struktural.
+
+* **SECOND NORMAL FORM (2NF)**
+  Standar arsitektur tabel progresif (berlaku setelah struktur lulus 1NF) yang menetapkan aturan mutlak: seluruh kolom non-kunci harus bergantung pada keseluruhan komponen *Primary Key*. Tabel yang masih menoleransi *Partial Dependency* dinyatakan gagal memenuhi standar 2NF dan akan tetap rentan terhadap anomali redundansi data.
+
+* **2NF DECOMPOSITION**
+  Solusi teknis untuk mencapai standar 2NF dengan memecah (*decompose*) satu tabel monolitik menjadi beberapa tabel terpisah berdasarkan entitas aslinya (misal: tabel Pasien, Vaksin, dan Status Vaksinasi). Melalui pemisahan ini, atribut non-kunci dialokasikan ke tabelnya masing-masing dan dijamin bergantung sepenuhnya 100% pada *Primary Key* tunggal di tabel barunya.
