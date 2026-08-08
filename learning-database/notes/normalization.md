@@ -52,3 +52,22 @@
 
 * **2NF DECOMPOSITION**
   Solusi teknis untuk mencapai standar 2NF dengan memecah (*decompose*) satu tabel monolitik menjadi beberapa tabel terpisah berdasarkan entitas aslinya (misal: tabel Pasien, Vaksin, dan Status Vaksinasi). Melalui pemisahan ini, atribut non-kunci dialokasikan ke tabelnya masing-masing dan dijamin bergantung sepenuhnya 100% pada *Primary Key* tunggal di tabel barunya.
+
+  ---
+
+  # Konsep Third Normal Form (3NF)
+
+* **HIERARKI NORMALISASI PROGRESIF**
+  Logika dasar bahwa normalisasi adalah proses yang progresif. Sebuah database mutlak harus sudah divalidasi dan lolos aturan 1NF dan 2NF sebelum bisa dievaluasi untuk 3NF. Mengabaikan prasyarat fondasi ini akan membuat arsitektur 3NF menjadi cacat dan tidak valid.
+
+* **TRANSITIVE DEPENDENCY**
+  Cacat arsitektur di mana sebuah kolom non-kunci (*non-primary key*) diam-diam bergantung secara fungsional pada kolom non-kunci lainnya. Secara matematis direpresentasikan sebagai: Jika A menentukan B, dan B menentukan C, maka A menentukan C melalui B. Ini melanggar prinsip independensi data dalam satu tabel.
+
+* **IDENTIFIKASI GEJALA TRANSITIF**
+  Cara intuitif mendeteksi anomali ini adalah ketika Anda bisa menebak nilai suatu kolom hanya dengan melihat kolom lain yang bukan *Primary Key*. Contohnya: Jika Anda tahu nilainya 'Prancis' (Negara), Anda otomatis tahu bahasanya 'Prancis' (Bahasa). Karena keduanya bukan identitas utama (ID), keterikatan antar-mereka menciptakan duplikasi data yang tidak perlu di setiap baris.
+
+* **THIRD NORMAL FORM (3NF)**
+  Standar arsitektur tingkat tiga yang memiliki satu aturan mutlak: setiap atribut non-kunci harus bergantung sepenuhnya dan HANYA pada *Primary Key*, bukan pada atribut non-kunci lainnya. Jika diucapkan dalam kredo database: *"All attributes must depend on the key, the whole key, and nothing but the key."*
+
+* **3NF DECOMPOSITION & FOREIGN KEY**
+  Solusi teknis untuk membasmi *Transitive Dependency* dengan memecah atribut yang saling bergantung (seperti Negara dan Bahasa) menjadi tabel baru tersendiri (Tabel Negara). Di tabel utama yang lama, disisakan salah satu atribut (misal: Negara) untuk bertindak sebagai *Foreign Key* (Kunci Tamu) yang menautkan kembali kedua tabel tersebut. Pemecahan ini memastikan redundansi hilang, dan setiap nilai di tabel baru murni 100% patuh pada *Primary Key*-nya sendiri.
