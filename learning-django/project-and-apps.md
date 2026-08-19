@@ -3,6 +3,12 @@
 * **WEB FRAMEWORK PARADIGM**
   Logika arsitektur di mana infrastruktur dasar web dinamis (seperti penanganan protokol HTTP, *development server*, dan koneksi database untuk mengatasi sifat web yang *stateless*) diabstraksi secara otomatis. Mengapa digunakan: Membebaskan *engineer* dari tugas konfigurasi berulang, sehingga fokus komputasi dan waktu dialihkan murni untuk membangun logika bisnis (*fitur*) yang unik.
 
+* **DJANGO CORE**
+ Django adalah framework Python berskala tinggi yang mengusung filosofi "batteries-included" (fitur bawaan lengkap). Karena Django sudah mengemas fitur krusial secara bawaan seperti sistem autentikasi, panel admin, dan *middleware* keamanan penangkal serangan siber, *engineer* dapat langsung fokus menulis logika bisnis aplikasi yang unik tanpa harus merakit infrastruktur keamanan dari nol.
+
+* **MVT**
+ MVT adalah singkatan dari Model-View-Tamplate. Ini adalah pola arsitektur django untuk memisahkan bagian data, logic, dan tampilan.
+
 * **DJANGO PROJECT**
   Entitas level tertinggi (*top-level*) yang merepresentasikan **keseluruhan** aplikasi web (contoh: platform jejaring sosial secara utuh). Secara teknis, *Project* adalah wadah manajemen (kerangka kerja) yang menyimpan direktori utama dan seluruh konfigurasi/pengaturan global yang mengatur jalannya sistem.
 
@@ -14,6 +20,9 @@
 
 * **APPLICATION REGISTRY (INSTALLED_APPS)**
   Sistem pendataan internal Django (berisi *metadata*). Logika *edge-case*: Meskipun Anda sudah men-generate folder *App* baru di dalam *Project*, Django akan **mengabaikannya** sepenuhnya sampai Anda mendaftarkan *App* tersebut ke dalam daftar `INSTALLED_APPS` di file pengaturan *Project*. Tanpa registrasi ini, komponen *App* (seperti *models*, *views*, dan *URLs*) tidak akan bisa berinteraksi dengan ekosistem *framework*.
+
+* **THREE-TIER ARCHITECTURE**
+ Pendekatan arsitektur modular yang memecah sistem perangkat lunak menjadi tiga lapisan logis yang terisolasi: *Presentation Tier* (UI/Front-End), *Application Tier* (Logika Back-End), dan *Data Tier* (Database). *Tujuan:* Menciptakan pemisahan tanggung jawab (*Separation of Concerns*). Jika ingin mengganti database tidak perlu merombak kode UI, begitu pula sebaliknya.
 
   ---
 
