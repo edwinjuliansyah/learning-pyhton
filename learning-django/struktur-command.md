@@ -1,59 +1,70 @@
-Pengantar Django dan Kegunaannya
+# Command
 
-Django adalah toolkit yang menyediakan komponen penting untuk pengembangan aplikasi web, memungkinkan pengembang fokus pada fitur unik aplikasi.
-Awalnya dibuat untuk aplikasi web penerbitan surat kabar, Django sangat cocok untuk proyek dengan konten teks, file media, dan lalu lintas tinggi.
+- django-admin
 
-Fitur dan Keunggulan Django
+`django-admin startproject nama_folder`
 
-Django menawarkan integrasi mudah dengan berbagai alat dan bahasa, serta menyediakan fitur seperti template, perpustakaan, dan API yang mudah dikelola dan skalabel.
-Framework ini mendukung keamanan, skalabilitas, dan adaptabilitas, serta memungkinkan pemisahan fitur antara backend dan frontend menggunakan API.
-Penggunaan Django di Dunia Nyata
+membuat struktur tamplate awal project django
 
-Django digunakan di berbagai sektor seperti eCommerce, kesehatan, keuangan, transportasi, media sosial, dan lainnya.
-Contoh aplikasi termasuk media sosial (seperti Instagram), aplikasi SaaS, platform media streaming OTT, dan penerapan machine learning melalui API dan model ML yang dapat diintegrasikan dengan cepat.
+- manage.py
+
+`python manage.py (command)`
+
+manage.py yang berfungsi sama seperti django-admin untuk tugashanya saja scopenya lokal 
+
+- startapp
+
+`python manage.py startapp (name of app)`
+
+membuat sub project atau app untuk fungsi tertentu
+
+
+- makemigrations
+
+`python manage.py makemigrations`
+
+django mengelola operasi basisdata dengan teknik ORM. Migrasi mengacu pada pembuatan tabel basis data yang strukturnya sesuai dengan model data yang dideklarasikan dalam aplikasi
+
+- migrate
+
+`pyhton manage.py migrate`
+
+ini menyinkronkan status basis data dengan model dan migrasi yang saat ini telah dideklarasikan
+
+- runserver
+
+`python manage.py runserver`
+
+ini memulai server pengembangan bawaan django di mesin lokal dengan alamat ip 127.0.0.1 dan port 8000.
+
+- shell
+
+`python manage.py shell`
+
+perintah ini membuka shell python interaktif di dalam proyek. ini berguna ketika perlu melakukan beberapa operasi interaktif dengan cepat. django lebih memilih Ipython dari pada shell python standar, jika Ipython telah teristall
 
 ---
 
-# project
-paket python yang berisi konfigurasi basis data yang digunakan oleh berbagai submodul (apps) dan pengaturan khusus lainnya
-skrip membuat struktur tamplate awal project django
+# Struktur project 
 
-(venv) c:~/django-admin startproject nama_folder
-
-berisi banyak file terutama manage.py yang berfungsi sama seperti django-admin untuk tugashanya saja scopenya lokal 
-
-- penggunaan umum manage.py
-python manage.py (command)
-
-- perintah untuk startapp
-python manage.py startapp (name of app)
-
-- makemigrations
-django mengelola operasi basisdata dengan teknik ORM. Migrasi mengacu pada pembuatan tabel basis data yang strukturnya sesuai dengan model data yang dideklarasikan dalam aplikasi
-
-perintah makemigrations
-
-python manage.py makemigrations
-
-- migrate
-ini menyinkronkan status basis data dengan model dan migrasi yang saat ini telah dideklarasikan
-
-pyhton manage.py migrate
-
-- runserver
-ini memulai server pengembangan bawaan django di mesin lokal dengan alamat ip 127.0.0.1 dan port 8000. jangan gunakan ini di lingkungan produksi
-
-python manage.py runserver
-
-- shell
-perintah ini membuka shell python interaktif di dalam proyek. ini berguna ketika perlu melakukan beberapa operasi interaktif dengan cepat. django lebih memilih Ipython dari pada shell python standar, jika Ipython telah teristall
-
-python manage.py shell
-
-# Project package 
 perintah startproject sebelumnya akan membuat folder dengan nama yang ditentukan dan didalamnya terdapat folderlain yang memiliki nama serupa. folder bagian dalam tersebut disebut sebagai package dan harus memiliki file __init__.py agar dikenai python. selain itu template startproject juga akan menambahkan 4 file py lain didalam folder tersebut
 
+```
+C:\djenv\demoproject 
+│   manage.py 
+│ 
+└───demoproject 
+        asgi.py 
+        settings.py 
+        urls.py 
+        wsgi.py 
+        __init__.py 
+```
+
+paket python berisi konfigurasi basis data yang digunakan oleh berbagai submodul (apps) dan pengaturan khusus lainnya
+
 - setting.py
+
 Django mengonfigurasi parameter-parameter tertentu beserta nilai defaultnya dan menempatkannya di berkas ini. 
 Utilitas django-admin dan skrip manage.py menggunakan pengaturan ini saat melakukan berbagai tugas administratif.
 
@@ -63,42 +74,32 @@ Skrip ini berisi daftar objek urlpatterns. Setiap kali browser klien meminta seb
 
 Struktur default urls.py berisi tampilan yang dipetakan ke situs Admin proyek.
 
+```
 from django.contrib import admin 
 from django.urls import path 
 
  urlpatterns = [ 
     path('admin/', admin.site.urls), 
 ] 
+```
 
 - asgi.py
+
 Berkas ini digunakan oleh server aplikasi yang mengikuti standar ASGI untuk menyajikan aplikasi web asinkron.
 
 - wsgi.py
 
-Banyak server aplikasi web mengimplementasikan standar WSGI. Skrip ini merupakan titik masuk bagi server yang kompatibel dengan WSGI tersebut untuk menyajikan aplikasi web klasik. 
+Banyak server aplikasi web mengimplementasikan standar WSGI. Berkas ini merupakan titik masuk bagi server yang kompatibel dengan WSGI tersebut untuk menyajikan aplikasi web klasik. 
 
-# isi settings.py
+## Isi settings.py
+
 Berkas ini mendefinisikan atribut-atribut yang memengaruhi fungsi aplikasi Django. Template ` startproject ` menetapkan beberapa nilai default untuk atribut-atribut ini. Nilai-nilai tersebut dapat dimodifikasi sesuai kebutuhan selama penggunaan aplikasi.
 
 - INSTALLED_APPS
 
 Ini adalah daftar string. Setiap string mewakili jalur aplikasi di dalam folder proyek induk. Template startproject menginstal beberapa aplikasi secara default. Aplikasi-aplikasi tersebut muncul dalam daftar INSTALLED_APPS.
 
-INSTALLED_APPS = [ 
-    'django.contrib.admin', 
-    'django.contrib.auth', 
-    'django.contrib.contenttypes', 
-    'django.contrib.sessions', 
-    'django.contrib.messages', 
-    'django.contrib.staticfiles', 
-] 
-
-Daftar ini harus diperbarui dengan menambahkan namanya setiap kali aplikasi baru diinstal. 
-
-Misalnya, jika kita membuat demoapp dengan perintah berikut:
-
-python manage.py startapp demoapp
-
+```
 INSTALLED_APPS = [ 
     'django.contrib.admin', 
     'django.contrib.auth', 
@@ -108,11 +109,31 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles', 
     'demoapp',
 ] 
+```
+
+Daftar ini harus diperbarui dengan menambahkan namanya setiap kali aplikasi baru diinstal. 
+
+Misalnya, jika kita membuat demoapp dengan perintah berikut:
+
+python manage.py startapp demoapp
+
+```
+INSTALLED_APPS = [ 
+    'django.contrib.admin', 
+    'django.contrib.auth', 
+    'django.contrib.contenttypes', 
+    'django.contrib.sessions', 
+    'django.contrib.messages', 
+    'django.contrib.staticfiles', 
+    'demoapp',
+] 
+```
 
 - Database
 
 Atribut ini adalah kamus yang menentukan konfigurasi satu atau lebih basis data yang akan digunakan oleh aplikasi Django saat ini. Secara default, Django menggunakan basis data SQLite. Oleh karena itu, pengaturan ini memiliki konfigurasi yang telah ditentukan sebelumnya untuknya.
 
+```
 DATABASES = {   
     'default': {   
         'ENGINE': 'django.db.backends.mysql',   
@@ -123,6 +144,7 @@ DATABASES = {
         'PORT': '3306',            
     }   
 } 
+```
 
 MySQL umumnya menggunakan port 3306. Port 8000 yang ditampilkan sebelumnya adalah port default untuk server web pengembangan Django, dan tidak terkait dengan SQLite (SQLite berbasis file dan tidak menggunakan port jaringan).
 
@@ -136,16 +158,56 @@ Atribut ini berupa daftar string. Secara default, daftar ini kosong. Setiap stri
 
 - ROOT_URLCONF
 
-Pengaturan ini berupa string yang mengarah ke modul urls.py tempat pola URL proyek berada. Dalam hal ini, pengaturannya adalah:
+`ROOT_URLCONF = 'demoproject.urls'`
 
-ROOT_URLCONF = 'demoproject.urls'
+Pengaturan ini berupa string yang mengarah ke modul urls.py tempat pola URL proyek berada. Dalam hal ini, pengaturannya adalah:
 
 - STATIC_URL
 
 Pengaturan ini mengarah ke folder tempat berkas statis, seperti kode JavaScript, berkas CSS, dan gambar, disimpan. Biasanya, pengaturan ini ditetapkan ke 'static/' yang sesuai dengan folder dengan nama tersebut di dalam folder induk proyek.
 
-- Uji instalasi
-Setelah membuat proyek, untuk memverifikasi bahwa proyek telah dibangun dengan benar, jalankan server pengembangan dengan perintah berikut sambil tetap berada di folder induk proyek:
+---
 
-python manage.py runserver
+# Struktur App
 
+Command `python3 manage.py startapp demoapp` menghasilkan struktur file berikut: 
+
+```
+C:demoproject 
+│   db.sqlite3 
+│   manage.py 
+│ 
+├───demoapp 
+│   │   admin.py 
+│   │   apps.py 
+│   │   models.py 
+│   │   tests.py 
+│   │   views.py 
+│   │   __init__.py 
+│   │ 
+│   └───migrations 
+│           __init__.py 
+│ 
+└───demoproject 
+    │   asgi.py 
+    │   settings.py 
+    │   urls.py 
+    │   wsgi.py 
+    │   __init__.py
+```    
+    
+- views.py
+
+berfungsi sebagai logika backend di server side, berkas ini berisikan fungsi fungsi app yang menerima request dan memberikan response (tampilan) kepengguna.
+
+- urls.py
+
+berfungsi sebagai dispacher url sesuai dengan urlpatterns yang sudah didefinisikan didalamnya. urls.py harus di buat manual, django tidak membuatnya secara otomatis karna tidak semua app harus memiliki urls.py
+
+- model.py
+
+berfungsi sebagai blueprint dari struktur basis data. mendefinisikan class sebagai tabel, variable sebagai kolom, dan isi variable sebagai tipe data.
+
+- test.py
+
+berfungsi sebagai pengujian kode di file lain secara otomatis.
