@@ -1,0 +1,107 @@
+==============================================================
+modul 2
+==============================================================
+http request
+==============================================================
+dasar dasar http
+cycle request response
+http method GET, POST, PUT, DELETE
+http request terdiri dari http method, path, versi dan header yang mengandung informasi tambahan
+http response terdiri seperti http request dan tambahan opsional content body seperti dokumen html, file gambar dan sebagainya
+
+kode status
+1xx information
+2xx success
+3xx rederection
+4xx error klien
+5xx error server
+
+==============================================================
+objek request response
+==============================================================
+objek request
+
+request.method
+request.GET
+request.POST
+request.COOKIES
+request.user
+request.FILES
+request.has_key()
+
+objek response
+
+status_code
+content
+__getitem__()
+__setitem__()
+write()
+
+contoh kode yang harus dicoba nanti
+
+from django.http import HttpResponse 
+def index(request): 
+    path = request.path 
+    method = request.method 
+    content=''' 
+<center><h2>Testing Django Request Response Objects</h2> 
+<p>Request path : " {}</p> 
+<p>Request Method :{}</p></center> 
+'''.format(path, method) 
+    return HttpResponse(content) 
+    
+    
+==============================================================
+membuat request response
+==============================================================
+1. def home(request):
+	path = request.path
+	return HttpResponse(path, content_type='text/html', charset='utf-8')
+
+- request.path: memunculkan hasil lokasi url
+- content_type: jenis text yang harus di kirim responsenya secara default text/html jika tidak di tuliskan secara eksplisit
+- charset: kumpulan huruf, simbol, emoji
+	UTF-8: Standar web modern yang mendukung hampir semua karakter dan emoji.
+	ASCII: Set karakter lama yang hanya mencakup huruf Inggris dasar dan angka.
+	ISO-8859-1: Standar lama untuk bahasa Latin/Eropa Barat.
+
+2. return juga bisa digunakan jika hanya berisi variabel misal
+def home(request):
+	path = request.path
+	respon = HttpResponse(path, content_type='text/html', charset='utf-8')
+	return respon
+
+3. metadata head bisa ditampilkan dan dimanipulasi secara eksplisit 
+def head(request):
+	path = request.path
+	scheme = request.scheme
+	method = request.method
+	address = request.META['REMOTE_ADDR']
+	user_agent = request.META['HTTP_USER_AGENT']
+	path_info = request.path_info
+	
+	msg = f"""<br>
+		<br>path: {path}
+		<br>address: {address}
+		<br>scheme: {scheme}
+		<br>method: {method}
+		<br>user agent: {user_agent}
+		<br>path info: {path_info}
+		"""
+	return HttpResponse(msg, content_type='text/html')
+	
+==============================================================
+memahami url
+==============================================================
+bagian bagian url
+scheme: jenis protocol yang digunakan bisa http atau https
+sub domain: www
+domain: SLD (second lavel domain) nama instansi (misal:littlelemon) dan TLD (top level domain) kategori atau negara (.com .org .id)
+path: lokasi penyimpanan sumber daya seperti dokumen web atau gambar yang berada di lokal maupun vps
+parameter URL (query string): berisi informasi tambahan dalam bentuk pasangan kunci nilai yang dimulai dengan tanda tanya(?) dan dipisahkan oleh ampersand(&)
+
+==============================================================
+parameter
+==============================================================
+
+
